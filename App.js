@@ -6,6 +6,7 @@ import LoginScreen from './LoginScreen';
 import LoginCheck from './LoginCheck';
 import SplashScreen from './SplashScreen';
 import RegisterScreen from './RegisterScreen';
+import OnboardingScreen from './OnboardingScreen';
 import DrawerNavigationRoutes from './DrawerNavigationRoutes';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -23,6 +24,7 @@ const Auth = () => {
         component={LoginCheck}
         options={{headerShown: false}  }
       /> */}
+
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
@@ -68,6 +70,13 @@ export default class Myapp extends Component<{}>
          return(
           <NavigationContainer>
             <Stack.Navigator initialRouteName="SplashScreen">
+            {/* onborading screen for  */}
+            {/* <Stack.Screen
+            name="OnboardingScreen"
+            component={OnboardingScreen}
+            options={{headerShown: false}  }
+            /> */}
+
               {/* SplashScreen which will come once for 5 Seconds */}
               <Stack.Screen
                 name="SplashScreen"

@@ -20,64 +20,6 @@ import { renderNode } from 'react-native-elements/dist/helpers';
 const baseUrl = 'http://3.108.170.236/erp/apis/login_otp.php';
 
 const LoginScreen = ({navigation}) => {
-  
-  // const CheckUserSignedIn = async () => {
-  //  // const navigation1 = useNavigation();
-  //   console.log('-----------------------------------------CheckUserSignedIn-----------------------------------');
-  //   let context = this;
-  //   try {
-  //      let value = await AsyncStorage.getItem('Otp_details');
-  //      if (value != null)
-  //      {
-  //         //do something 
-  //         console.log('-----------------------------------------CheckUserSignedIn---if--------------------------');
-  //         setUserLoggedin(true);
-  //         //navigation.replace('DrawerNavigationRoutes');
-  //         console.log(userLoggedin);
-  //      }
-  //      else 
-  //      {
-  //       console.log('.........................................-CheckUserSignedIn---else.....................');
-  //       setUserLoggedin(false);
-  //       console.log('.........................................setUserLoggedin set False.....................');
-  //       //LoginScreen;
-  //       //return ({});
-  //      }
-  //   } catch (error) {
-  
-  //     console.log(error);
-  //     // Error retrieving data
-  //   }
-  // };
-  //const [didMount, setDidMount] = useState(false); 
-
- //CheckUserSignedIn();
-
- // console.log('--------------------------------------------CheckUserSignedIn called---------------------------------------------------');
- // console.log('-----------------------------------------------User logged In----------------------------------------------------------');
-  //console.log(userLoggedin);
-  //console.log('--------------------------------------------checkusersignin  called in use effect---------------------------------------------------');
-
-  // useEffect(() => {
-  //   console.log('--------------------------------------------------Use Effect--------------------------------------------');
-  //      CheckUserSignedIn();
-  //    //  setDidMount(true); 
-  //    // return () => setDidMount(false) 
-  //   }, []);
-
-      //  if(!didMount) {
-      //   return (
-          
-      //     <View>
-      //       <Text>Hi manoj pali</Text>
-      //     </View>
-          
-      //   );
-      // }
-      
-
-// 
-
   const [userEmail, setUserEmail] = useState('');
   const [userMobile, setUserMobile] = useState('');
   const [userOtp, setUserOtp] = useState('');
@@ -96,56 +38,26 @@ const LoginScreen = ({navigation}) => {
   const passwordInputRef = createRef();
   const otpInputRef = createRef();
   const handleSubmitPress = async () => {
+    setLoading(true);
     console.log('----------------------------------- OTP submitted------------------------------------------------');
-   // await AsyncStorage.getItem("@Otp_details").then((value)=>setMyotp_value(value));
-   // console.log(myotp_value);
-   // if(userOtp==cmpOtp){
-   //   console.log('user otp verified');
-   // }
-   //const response = otpsubmitted;
 
    const userdetails= await AsyncStorage.getItem("Otp_details");
    const details = JSON.parse(userdetails);
    console.log(details);
-//
-
-    // await AsyncStorage.getItem("Otp_details").then(JSON.parse).then(value => {
-    //  //setMyotp_value(value.otp_value);
-    //  console.log(value.otp_value);
-    //  setMyotp_value(info.otp_value);
-    //  setMystudent_id(info.student_id);
-    //  //setMystudent_id(value.student_id);
-    //  console.log(value.student_id);
-    //  console.log('otp details');
-    // });
-
-    console.log('------------------------------------'+ details[0].otp_value);
-    myotp = details[0].otp_value;
-    setMyotp_value(myotp);
-//////////////////////////////////////////////////////////
-  //  details.map((info)=>{
-  //   setMyotp_value(details[0].otp_value);
-  //   //setMystudent_id(info.student_id);
-  // });
-
- //details.map((info)=>{setMystudent_id(info.student_id);});
- console.log('----------------------------MY OTP value' + myotp);
- //console.log(mystudent_id);
- console.log('-----------------------------User OTP ----' + userOtp);
-
-//////////////////////////////////////////////////////////   
+   console.log('------------------------------------'+ details[0].otp_value);
+   myotp = details[0].otp_value;
+   setMyotp_value(myotp);
+   console.log('----------------------------MY OTP value' + myotp);
+   console.log('-----------------------------User OTP ----' + userOtp);
    if(myotp==userOtp){
       console.log('OTP verified');
       setUserLoggedin(true);
+      setLoading(false);
       navigation.replace('DrawerNavigationRoutes');
    } 
    else{
-    //alert('OTP is mismatch');
     console.log('otp mismatched');
    }
-   
-  // console.log()
-   
   };
 
 const handleasync_copy = async () => {
@@ -178,39 +90,21 @@ const handleasync_copy = async () => {
     
     const json_data = await response.json();
 
-    //  const demojsondata = {
-    //    'otp_value': '00112233',
-    //    'student_id': '111111'
-    //  }
-
    console.log('----------json_data[0]------------'+json_data[0].otp_value);
   
    
    setLoading(false);
    setshowTheThing(true);
    setHideTheThing(false);
-    //setOtpData(json_data);
-    //setOtpData(demojsondata);
-    //console.log(otpData.otp_value);
-    //console.log(mydata.otp_value);
-    //console.log(json_data['otp_value']);
-    //console.log(mydata['otp_value']);
 
- // await AsyncStorage.setItem("otp_value", demojsondata.otp_value);
- //await AsyncStorage.setItem("Otp_details", JSON.stringify(demojsondata));
+   await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
 
- await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
-//  await AsyncStorage.getItem("Otp_details").then((key,value)=> console.log(key));
-//  console.log(await AsyncStorage.getItem("otp_value"));
-//  await AsyncStorage.getItem("Otp_details").then((value)=> console.log(value));
- //console.log(json_data.student_id);
- //console.log(json_data.otp_value);
 };
 const resendOTP = async () => {
 
   console.log('mobile blank submit');
   if(userMobile==null || userMobile=='' || !userMobile){
-   // console.log('mobile blank submit');
+   alert('Please fill Mobile Number');
     return;
   }
 
@@ -233,33 +127,12 @@ const resendOTP = async () => {
     console.log('Otp fetched');
     
     const json_data = await response.json();
-
-    //  const demojsondata = {
-    //    'otp_value': '00112233',
-    //    'student_id': '111111'
-    //  }
-
-   console.log('----------json_data[0]------------'+json_data[0].otp_value);
+    console.log('----------json_data[0]------------'+json_data[0].otp_value);
   
    
    setLoading(false);
    setshowTheThing(true);
-    //setOtpData(json_data);
-    //setOtpData(demojsondata);
-    //console.log(otpData.otp_value);
-    //console.log(mydata.otp_value);
-    //console.log(json_data['otp_value']);
-    //console.log(mydata['otp_value']);
-
- // await AsyncStorage.setItem("otp_value", demojsondata.otp_value);
- //await AsyncStorage.setItem("Otp_details", JSON.stringify(demojsondata));
-
- await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
-//  await AsyncStorage.getItem("Otp_details").then((key,value)=> console.log(key));
-//  console.log(await AsyncStorage.getItem("otp_value"));
-//  await AsyncStorage.getItem("Otp_details").then((value)=> console.log(value));
- //console.log(json_data.student_id);
- //console.log(json_data.otp_value);
+   await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
 };
 
   if(!userLoggedin) {
@@ -293,7 +166,7 @@ const resendOTP = async () => {
                 onChangeText={ userMobile => setUserMobile(userMobile)
               
                 }
-                placeholder="Enter Mobile Number" //dummy@abc.com
+                placeholder="Enter Mobile Number"
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 keyboardType="numeric"
