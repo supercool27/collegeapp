@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';  
+import React, { Component,LogBox } from 'react';  
 import { Platform, StyleSheet, View, Text,  
 Image, TouchableOpacity, Alert } from 'react-native';
 import LoginScreen from './LoginScreen';
@@ -16,6 +16,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 const Auth = () => {
+
+
+   
+
   // Stack Navigator for Login and Sign up Screen
   return (
     <Stack.Navigator initialRouteName="LoginScreen">
@@ -64,7 +68,9 @@ export default class Myapp extends Component<{}>
      this.state={  
      isVisible : true, 
     }  
-  }  
+  }
+  
+  
     render()  
     {
          return(

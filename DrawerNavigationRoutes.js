@@ -2,18 +2,20 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import  {getFocusedRouteNameFromRoute}  from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
-
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import StudentScreen from './DrawerScreens/StudentScreen';
 //import HomeScreen from './DrawerScreens/HomeScreen';
 //import SettingsScreen from './DrawerScreens/SettingScreen';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
 
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 /////////////////////////////////////////////////////////////////////////////////////////
 import CustomDrawer from './Components/CustomDrawer';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
 import MomentsScreen from './screens/MomentsScreen';
@@ -129,15 +131,24 @@ const DrawerNavigatorRoutes = (props) => {
       />
       <Drawer.Screen
         name="Profile"
+        component={StudentScreen}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="person-outline" size={22} color={color} />
+          ),
+          
+        }}
+      />
+            {/* <Drawer.Screen
+        name="Profile"
         component={ProfileScreen}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="person-outline" size={22} color={color} />
           ),
-        }}
-      />
+        }} /> */}
       <Drawer.Screen
-        name="Messages"
+        name="Fees"
         component={MessagesScreen}
         options={{
           drawerIcon: ({color}) => (
@@ -145,8 +156,8 @@ const DrawerNavigatorRoutes = (props) => {
           ),
         }}
       />
-      <Drawer.Screen
-        name="Moments"
+      {/* <Drawer.Screen
+        name="Scolorship"
         component={MomentsScreen}
         options={{
           drawerIcon: ({color}) => (
@@ -162,7 +173,7 @@ const DrawerNavigatorRoutes = (props) => {
             <Ionicons name="settings-outline" size={22} color={color} />
           ),
         }}
-      />
+      /> */}
     </Drawer.Navigator>
 
   );

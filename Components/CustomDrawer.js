@@ -4,7 +4,7 @@ import {
   Text,
   ImageBackground,
   Image,
-  TouchableOpacity,Alert
+  TouchableOpacity,Alert,Share
 } from 'react-native';
 import {
   DrawerContentScrollView,
@@ -13,8 +13,29 @@ import {
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {LogBox} from "react-native";
+
 
 const CustomDrawer = props => {
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'Rugta Group | Sanjay Rungta Group of Institution',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -43,7 +64,7 @@ const CustomDrawer = props => {
                 fontFamily: 'Roboto-Regular',
                 marginRight: 5,
               }}>
-              280 Coins
+              M.Tech Final year
             </Text>
             <FontAwesome5 name="coins" size={14} color="#fff" />
           </View>
@@ -61,7 +82,7 @@ const CustomDrawer = props => {
                 fontSize: 15,
                 fontFamily: 'Roboto-Medium',
                 marginLeft: 5,
-              }}>
+              }} onPress={onShare}>
               Tell a Friend
             </Text>
           </View>
