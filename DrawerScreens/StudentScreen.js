@@ -58,6 +58,7 @@ const StudentScreen = navigation => {
     getStudentDetails();
   }, []);
 // 
+// hi danish and nitin 
   return (
     <View>
       <Loader loading={loading} />
