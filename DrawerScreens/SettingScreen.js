@@ -19,8 +19,6 @@ const SettingsScreen = () => {
             }}>
             Student fees Details Goes here
             {'\n\n'}
-           {/* its my desktop code */}
-           {/* its my lapycode */}
           </Text>
         </View>
         <Text
@@ -29,8 +27,6 @@ const SettingsScreen = () => {
             textAlign: 'center',
             color: 'grey',
           }}>
-         {/* its my desktop code */}
-        {/* its my lapycode */}
         </Text>
         <Text
           style={{
@@ -38,7 +34,6 @@ const SettingsScreen = () => {
             textAlign: 'center',
             color: 'grey',
           }}>
-            
         </Text>
       </View>
     </SafeAreaView>

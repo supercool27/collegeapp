@@ -11,7 +11,7 @@ const HomeScreen = () => {
  return (
     <SafeAreaView style={{flex: 1}}>
         <StudentScreen/>
-        {/* <TableExample/> */}
+        {/* <TableExample style={{flex: 0.3}}/> */}
       <View style={{flex: 1, padding: 16}}>
         <View
           style={{

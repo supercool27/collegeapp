@@ -45,7 +45,8 @@ const CustomDrawer = props => {
           source={require('../Assets/Images/menu-bg.jpeg')}
           style={{padding: 20}}>
           <Image
-            source={require('../Assets/Images/user-profile.jpg')}
+           // source={require('../Assets/Images/user-profile.jpg')}
+           source = {{ uri:'http://3.108.170.236/erp/StudentPanel/stud_photos/22022022130223737460RSR_MTECH_50_Photo.jpeg'}}
             style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10}}
           />
           <Text

@@ -13,11 +13,9 @@ import {DataTable} from 'react-native-paper';
 import Loader from '../Components/Loader';
 import {Card, ListItem, Button, Icon} from 'react-native-elements';
 import {Shimmer} from 'react-native-shimmer';
-
 const StudentScreen = navigation => {
   const [loading, setLoading] = useState(false);
   const [mydata, setMydata] = useState([]);
-
   const getStudentDetails = async () => {
     setLoading(true);
     try {
@@ -57,7 +55,6 @@ const StudentScreen = navigation => {
   useEffect(() => {
     getStudentDetails();
   }, []);
-
   return (
     <View>
       <Loader loading={loading} />
