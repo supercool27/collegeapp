@@ -19,7 +19,7 @@ const SettingsScreen = () => {
             }}>
             Student fees Details Goes here
             {'\n\n'}
-           
+           {/* its my lapycode */}
           </Text>
         </View>
         <Text
@@ -28,7 +28,7 @@ const SettingsScreen = () => {
             textAlign: 'center',
             color: 'grey',
           }}>
-        
+        {/* its my lapycode */}
         </Text>
         <Text
           style={{

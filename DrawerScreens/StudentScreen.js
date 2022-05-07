@@ -73,8 +73,7 @@ const StudentScreen = navigation => {
                     resizeMode="cover"
                     source={{uri: ' ' + item.stud_profile_pic}}
                   />
-                  <Text>{u.name}</Text>
-
+                  <Text>{u.name} </Text>
                   <Text> Current Status : {item.current_status} </Text>
                   <Text> Student Roll : {item.stud_roll_no} </Text>
                   <Text> University Roll no: {item.university_roll_no} </Text>
