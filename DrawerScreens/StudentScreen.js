@@ -57,8 +57,7 @@ const StudentScreen = navigation => {
   useEffect(() => {
     getStudentDetails();
   }, []);
-// 
-// hi danish and nitin 
+
   return (
     <View>
       <Loader loading={loading} />
