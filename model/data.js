@@ -7,10 +7,10 @@ export const sliderData = [
     title: 'Second Game',
     image: require('../Assets/Images/homescreen/game-2.jpeg'),
   },
-  {
-    title: 'Third Game',
-    image: require('../Assets/Images/homescreen/game-3.png'),
-  },
+  // {
+  //   title: 'Third Game',
+  //   image: require('../Assets/Images/homescreen/game-3.png'),
+  // },
 ];
 
 export const paidGames = [

@@ -47,7 +47,7 @@ export default function HomeScreen({navigation}) {
           </TouchableOpacity>
         </View>
 
-        {/* <View
+        <View
           style={{
             flexDirection: 'row',
             borderColor: '#C6C6C6',
@@ -55,34 +55,39 @@ export default function HomeScreen({navigation}) {
             borderRadius: 8,
             paddingHorizontal: 10,
             paddingVertical: 8,
-          }}> */}
+          }}> 
           {/* <Feather
             name="search"
             size={20}
             color="#C6C6C6"
             style={{marginRight: 5}}
           />
-          <TextInput placeholder="Search" /> */}
+          <TextInput placeholder="Search" />
         <View
           style={{
             marginVertical: 15,
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
+          {/* <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
            Events
-          </Text>
+          </Text> */}
+          <View> 
+           <Carousel
+            ref={c => {
+              this._carousel = c;
+            }}
+            data={sliderData}
+            renderItem={renderBanner}
+            sliderWidth={windowWidth - 40}
+            itemWidth={300}
+            loop={true}
+            autoplay={true}
+          />
         </View>
-        <Carousel
-          ref={c => {
-            this._carousel = c;
-          }}
-          data={sliderData}
-          renderItem={renderBanner}
-          sliderWidth={windowWidth - 40}
-          itemWidth={300}
-          loop={true}
-        />
+
+        </View>
+        
         <View>   
             <StudentScreen/>
         </View>

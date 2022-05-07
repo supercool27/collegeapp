@@ -30,7 +30,6 @@ const HomeScreen = () => {
            
           </Text>
         </View>
-
         <Text
           style={{
             fontSize: 18,
@@ -45,10 +44,8 @@ const HomeScreen = () => {
             textAlign: 'center',
             color: 'grey',
           }}>
-       
         </Text>
       </View>
-
     </SafeAreaView>
   );
 };

@@ -90,12 +90,11 @@ const handleasync_copy = async () => {
     
     const json_data = await response.json();
 
-   console.log('----------json_data[0]------------'+json_data[0].otp_value);
-  
-   
-   setLoading(false);
-   setshowTheThing(true);
-   setHideTheThing(false);
+  console.log('----------json_data[0]------------'+json_data[0].otp_value);
+  //alert("ye wali otp enter karna bro"+json_data[0].otp_value);
+  setLoading(false);
+  setshowTheThing(true);
+  setHideTheThing(false);
 
    await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
 
