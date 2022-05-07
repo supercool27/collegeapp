@@ -19,7 +19,7 @@ const SettingsScreen = () => {
             }}>
             Student fees Details Goes here
             {'\n\n'}
-           
+           {/* its my desktop code */}
           </Text>
         </View>
         <Text
@@ -28,7 +28,7 @@ const SettingsScreen = () => {
             textAlign: 'center',
             color: 'grey',
           }}>
-        
+         {/* its my desktop code */}
         </Text>
         <Text
           style={{
