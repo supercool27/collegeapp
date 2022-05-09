@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 
+
 const SettingsScreen = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -17,7 +18,9 @@ const SettingsScreen = () => {
               textAlign: 'center',
               marginBottom: 16,
             }}>
-            Student fees Details Goes here
+
+
+
             {'\n\n'}
           </Text>
         </View>
