@@ -22,6 +22,17 @@ class FlatListDemo extends Component {
   }
 
 
+
+
+myBananas=()=> {
+   let pic = {
+     uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+   };
+ return(
+  <Image src={pic} style={{ width: 193 ,height:110,marginTop:50 }}/> 
+ );
+ };
+
   flatlistBasics=()=>{
     return(
         <View>

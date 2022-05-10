@@ -14,10 +14,10 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 const CustomSidebarMenu = (props) => {
-  async function clearData(){
-    await AsyncStorage.clear();
-    console.log('------------------------------------Clear data--------------------------------------');
-  }
+  // async function clearData(){
+  //   await AsyncStorage.clear();
+  //   console.log('------------------------------------Clear data--------------------------------------');
+  // }
   
   return (
     <View style={stylesSidebar.sideMenuContainer}>

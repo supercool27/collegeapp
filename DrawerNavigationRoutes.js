@@ -107,7 +107,7 @@ const DrawerNavigatorRoutes = (props) => {
     //     component={SettingScreenStack}
     //   />
     // </Drawer.Navigator>
-<Drawer.Navigator
+      <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
@@ -136,7 +136,6 @@ const DrawerNavigatorRoutes = (props) => {
           drawerIcon: ({color}) => (
             <Ionicons name="person-outline" size={22} color={color} />
           ),
-          
         }}
       />
             {/* <Drawer.Screen

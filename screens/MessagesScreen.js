@@ -4,7 +4,7 @@ import FlatListDemo from '../Components/FlatListDemo';
 const MessagesScreen = () => {
   return (
     <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-     <FlatListDemo/>
+     {/* <FlatListDemo/> */}
     </View>
   )
 }
