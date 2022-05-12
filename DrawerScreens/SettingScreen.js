@@ -19,8 +19,6 @@ const SettingsScreen = () => {
               marginBottom: 16,
             }}>
 
-
-
             {'\n\n'}
           </Text>
         </View>

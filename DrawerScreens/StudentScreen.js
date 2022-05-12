@@ -7,6 +7,7 @@ import {
   ImageBackground,
   SafeAreaView,
   ScrollView,
+  StyleSheet
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {DataTable} from 'react-native-paper';
@@ -61,8 +62,8 @@ const StudentScreen = navigation => {
       {mydata.map((item, key) => (
         <View>
           <Card>
-            <Card.Title>Hello, {item.stud_name}</Card.Title>
-            <Card.Divider />
+            <Card.Title> Hello, {item.stud_name}</Card.Title>
+            <Card.Divider/>
             {mydata.map((u, i) => {
               return (
                 <View key={i}>
@@ -84,5 +85,6 @@ const StudentScreen = navigation => {
     </View>
   );
 };
+
 
 export default StudentScreen;

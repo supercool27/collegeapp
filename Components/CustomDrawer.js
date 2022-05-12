@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,18 +6,17 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  Share
+  Share,
 } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-community/async-storage';
 import {LogBox} from 'react-native';
-
+import { initialWindowMetrics } from 'react-native-safe-area-context';
 const CustomDrawer = props => {
   // console.log(form.defaultProps);
   const onShare = async () => {
@@ -41,7 +40,7 @@ const CustomDrawer = props => {
 
   const [mydata, setMydata] = useState([]);
   const getDrawerDetails = async () => {
-      try {
+    try {
       const userdetails = await AsyncStorage.getItem('Otp_details');
       const details = JSON.parse(userdetails);
       const otp_valued = details[0].otp_value; // is me value aa rahi hai
@@ -81,74 +80,95 @@ const CustomDrawer = props => {
 
   return (
     <View style={{flex: 1}}>
-          <DrawerContentScrollView
-              {...props}
-              contentContainerStyle={{backgroundColor: '#8200d6'}}>
-          <ImageBackground
+      <DrawerContentScrollView
+        {...props}
+        contentContainerStyle={{backgroundColor: '#8200d6'}}>
+        <ImageBackground
           source={require('../Assets/Images/menu-bg.jpeg')}
-          style={{padding: 20}}>
-               { 
-        mydata.map((item,key) =>
-        (
-        <Image
-            source={{
-              uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/${item.stud_profile_pic}',
-            }}
+          style={{padding: 10}}>
+          {mydata.map((item, key) => (
+            <Image
+              // source={{
+              //   uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/${item.stud_profile_pic}',
+              // }}
 
-            // source={{
-            //   uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/'+{item.stud_profile_pic},
-            // }}
-            // source={{
-            //   uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/'+{item.stud_profile_pic},
-            // }}
-            // source = {{ uri:'http://3.108.170.236/erp/StudentPanel/stud_photos/22022022130223737460RSR_MTECH_50_Photo.jpeg'}}
-            style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10}}
-          />
-        )
-      ) 
-    }
-   
-          
-          <Text
-            style={{
-              color: '#fff',
-              fontSize: 18,
-              fontFamily: 'Roboto-Medium',
-              marginBottom: 5,
-            }}>
-      { 
-        mydata.map((item,key) =>
-        (
-           <View><Text> {item.stud_name } </Text></View> 
-        )
-        ) 
-      }
-         
+              // source={{
+              //   uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/'+{item.stud_profile_pic},
+              // }}
+              // source={{
+              //   uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/'+{item.stud_profile_pic},
+              // }}
+              source={{
+                uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/22022022130223737460RSR_MTECH_50_Photo.jpeg',
+              }}
+              style={{
+                height: 80,
+                width: 80,
+                borderRadius: 40,
+                marginBottom: 10,
+                borderColor: 'white',
+                borderWidth: 2,
+                borderRadius: 75,
+              }}
+            />
+          ))}
+
+          <Text>
+            {mydata.map((item, key) => (
+              <View style={{flexDirection:"row"}}>
+                <View style={{ padding:3 }}>
+                  <FontAwesome5  name="user-tie" size={20} color="#fff" />
+                </View>
+               <View style={{paddingLeft:7}}> 
+                {/* <FontAwesomeIcon icon="fa-solid fa-user" /> */}
+                <Text
+                  style={{
+                    color: '#ffffff',
+                    fontSize: 15,
+                    fontFamily: 'Roboto-Medium',
+                   
+                    flex:1,
+                    fontWeight:'bold',
+                 
+                    
+                  }}>
+                  {' '}
+                  {item.stud_name}{' '}
+                </Text>
+                </View>
+              </View>
+            ))}
           </Text>
           <View style={{flexDirection: 'row'}}>
-      <Text
-              style={{
-                color: '#fff',
-                fontFamily: 'Roboto-Regular',
-                marginRight: 5,
-              }}>
-      { 
-        mydata.map((item,key) =>
-          (
-            <View><Text>{item.stud_roll_no}</Text></View>
-          )
-        ) 
-      }
-      </Text>
-            <FontAwesome5 name="coins" size={14} color="#fff" />
+            <View style={{ padding:3 }}>
+              <FontAwesome5 name="book-open" size={16} color="#fff" />
+            </View>
+          <View style={{paddingLeft:7}}>
+            <Text>
+              {mydata.map((item, key) => (
+                <View>
+                  <Text
+                    style={{
+                      color: '#ffffff',
+                      fontSize: 15,
+                      fontFamily: 'Roboto-Medium',
+                      flex:1,
+                      fontWeight:'bold',
+                    }}>
+                    {item.stud_roll_no}
+                  </Text>
+                </View>
+              ))}
+            </Text>
+          </View>  
           </View>
         </ImageBackground>
-       
+
         <View style={{flex: 1, backgroundColor: '#fff', paddingTop: 10}}>
           <DrawerItemList {...props} />
         </View>
-          </DrawerContentScrollView>
-   
+      </DrawerContentScrollView>
+
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -191,7 +211,7 @@ const CustomDrawer = props => {
                     {
                       text: 'Confirm',
                       onPress: async () => {
-                        try {                                
+                        try {
                           AsyncStorage.clear();
                           //console.log(AsyncStorage.clear());
                           console.log(
@@ -211,7 +231,7 @@ const CustomDrawer = props => {
             </Text>
           </View>
         </TouchableOpacity>
-      </View> 
+      </View>
     </View>
   );
 };

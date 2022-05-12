@@ -17,11 +17,10 @@ export default function BannerSlider({data}) {
   //   </Card.Actions>
   // </Card>,
     <Card>
-     
       <View>
         <Image
           source={data.image}
-          style={{height: 150, width: 300, borderRadius: 10}}
+          style={{ height: 150, width: 330, borderRadius: 10 }}
         />
       </View>
     </Card>
