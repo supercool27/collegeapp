@@ -57,29 +57,29 @@ const StudentScreen = navigation => {
     getStudentDetails();
   }, []);
   return (
-    <View>
+    <View style={{padding:20}}>
       <Loader loading={loading} />
       {mydata.map((item, key) => (
-        <View>
-          <Card>
-            <Card.Title> Hello, {item.stud_name}</Card.Title>
-            <Card.Divider/>
+        <View style={{borderColor:'lightgrey',borderWidth:1}}>
+         
+            <Text style={{padding:10}}> Hello, {item.stud_name} </Text>
+           
             {mydata.map((u, i) => {
               return (
                 <View key={i}>
                   <Image
                     resizeMode="cover"
-                    source={{uri: ' ' + item.stud_profile_pic}}
+                    source={{uri: 'http://3.108.170.236/erp/StudentPanel/stud_photos/'+ item.stud_profile_pic }}
                   />
-                  <Text>{u.name} </Text>
-                  <Text> Current Status : {item.current_status} </Text>
-                  <Text> Student Roll : {item.stud_roll_no} </Text>
-                  <Text> University Roll no: {item.university_roll_no} </Text>
-                  <Text> Mobile Number : {item.stud_contactno} </Text>
+                  <Text style={{padding:10}}> {u.name} </Text>
+                  <Text style={{padding:10}}> Current Status : {item.current_status} </Text>
+                  <Text style={{padding:10}}> Student Roll : {item.stud_roll_no} </Text>
+                  <Text style={{padding:10}}> University Roll no: {item.university_roll_no} </Text>
+                  <Text style={{padding:10}}> Mobile Number : {item.stud_contactno} </Text>
                 </View>
               );
             })}
-          </Card>
+        
         </View>
       ))}
     </View>

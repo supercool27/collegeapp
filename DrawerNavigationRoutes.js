@@ -10,12 +10,10 @@ import StudentScreen from './DrawerScreens/StudentScreen';
 //import SettingsScreen from './DrawerScreens/SettingScreen';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
-
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 import CustomDrawer from './Components/CustomDrawer';
-
 import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
 import MomentsScreen from './screens/MomentsScreen';

@@ -17,6 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-community/async-storage';
 import {LogBox} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
+
 const CustomDrawer = props => {
   // console.log(form.defaultProps);
   const onShare = async () => {

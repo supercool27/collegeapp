@@ -42,11 +42,6 @@ myKarela=()=>{
   )
 }
 
-
-
-
-
-
   flatlistBasics=()=>{
     return(
         <View>
