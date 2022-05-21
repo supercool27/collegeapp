@@ -18,7 +18,6 @@ import { or } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/native';
 import { renderNode } from 'react-native-elements/dist/helpers';
 const baseUrl = 'http://3.108.170.236/erp/apis/login_otp.php';
-
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userMobile, setUserMobile] = useState('');
@@ -38,18 +37,17 @@ const LoginScreen = ({navigation}) => {
   const passwordInputRef = createRef();
   const otpInputRef = createRef();
   const handleSubmitPress = async () => {
-    setLoading(true);
-    console.log('----------------------------------- OTP submitted------------------------------------------------');
-
-   const userdetails= await AsyncStorage.getItem("Otp_details");
-   const details = JSON.parse(userdetails);
-   console.log(details);
-   console.log('------------------------------------'+ details[0].otp_value);
-   myotp = details[0].otp_value;
-   setMyotp_value(myotp);
-   console.log('----------------------------MY OTP value' + myotp);
-   console.log('-----------------------------User OTP ----' + userOtp);
-   if(myotp==userOtp){
+  setLoading(true);
+  console.log('----------------------------------- OTP submitted------------------------------------------------');
+  const userdetails= await AsyncStorage.getItem("Otp_details");
+  const details = JSON.parse(userdetails);
+  console.log(details);
+  console.log('------------------------------------'+ details[0].otp_value);
+  myotp = details[0].otp_value;
+  setMyotp_value(myotp);
+  console.log('----------------------------MY OTP value' + myotp);
+  console.log('-----------------------------User OTP ----' + userOtp);
+  if(myotp==userOtp){
       console.log('OTP verified');
       setUserLoggedin(true);
       setLoading(false);
@@ -59,15 +57,12 @@ const LoginScreen = ({navigation}) => {
     console.log('otp mismatched');
    }
   };
-
 const handleasync_copy = async () => {
-
-  
+try{
   if(userMobile==null || userMobile=='' || !userMobile){
     console.log('mobile blank submit');
     return;
   }
-
     setSendOtp('Resend OTP');
     setLoading(true);
     const requestOptions = {
@@ -78,27 +73,30 @@ const handleasync_copy = async () => {
       },
       body: JSON.stringify({monumber: userMobile}),
     };
-
     console.log('-------------requestOptions ---------------' + requestOptions);
     console.log('-------------baseUrl ---------------' +baseUrl);
     const response = await fetch(
       baseUrl,
       requestOptions,
     );
-    const response1 = await fetch('https://webhook.site/4326abbc-7ec9-41d0-b967-ad888f79c33a', requestOptions);
-    console.log('Otp fetched');
+   const response1 = await fetch('https://webhook.site/29cc08b4-b096-4f82-a35c-28a1ab6db15c', requestOptions);
+   console.log(json_data);
+   console.log('Otp fetched');
+   const json_data = await response.json();
     
-    const json_data = await response.json();
-
-  console.log('----------json_data[0]------------'+json_data[0].otp_value);
-  //alert("ye wali otp enter karna bro"+json_data[0].otp_value);
-  setLoading(false);
-  setshowTheThing(true);
-  setHideTheThing(false);
-
-   await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
-
+    console.log('----------json_data[0]------------'+json_data[0].otp_value);
+    //alert("ye wali otp enter karna bro"+json_data[0].otp_value);
+    setLoading(false);
+    setshowTheThing(true);
+    setHideTheThing(false);
+    await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
+    }
+    catch(e){
+      console.log(e);
+      // [TypeError: undefined is not an object (evaluating 'json_data[0].otp_value')]
+      }
 };
+
 const resendOTP = async () => {
 
   console.log('mobile blank submit');
@@ -106,7 +104,6 @@ const resendOTP = async () => {
    alert('Please fill Mobile Number');
     return;
   }
-
     setSendOtp('Resend OTP');
     setLoading(true);
     const requestOptions = {
@@ -117,21 +114,17 @@ const resendOTP = async () => {
       },
       body: JSON.stringify({monumber: userMobile}),
     };
-
     const response = await fetch(
       'http://3.108.170.236/erp/apis/login_otp.php',
       requestOptions,
     );
     //const response1 = await fetch('https://webhook.site/4326abbc-7ec9-41d0-b967-ad888f79c33a', requestOptions);
     console.log('Otp fetched');
-    
     const json_data = await response.json();
     console.log('----------json_data[0]------------'+json_data[0].otp_value);
-  
-   
-   setLoading(false);
-   setshowTheThing(true);
-   await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
+    setLoading(false);
+    setshowTheThing(true);
+    await AsyncStorage.setItem("Otp_details", JSON.stringify(json_data));
 };
 
   if(!userLoggedin) {

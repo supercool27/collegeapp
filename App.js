@@ -8,15 +8,10 @@ import SplashScreen from './SplashScreen';
 import RegisterScreen from './RegisterScreen';
 import OnboardingScreen from './OnboardingScreen';
 import DrawerNavigationRoutes from './DrawerNavigationRoutes';
-
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
-
 const Stack = createStackNavigator();
-
 const Auth = () => {
-
   // Stack Navigator for Login and Sign up Screen
   return (
     <Stack.Navigator initialRouteName="LoginScreen">
@@ -29,15 +24,13 @@ const Auth = () => {
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
-        options={{headerShown: false}  }
+        options={{headerShown: false}}
       />
-              <Stack.Screen
+        <Stack.Screen
           name="DrawerNavigationRoutes"
           component={DrawerNavigationRoutes}
           // Hiding header for Navigation Drawer as we will use our custom header
           options={{headerShown: false}}
-          
-
         />
       <Stack.Screen
         name="RegisterScreen"

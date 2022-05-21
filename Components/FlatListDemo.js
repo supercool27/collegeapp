@@ -21,9 +21,6 @@ class FlatListDemo extends Component {
     this.makeRemoteRequest();
   }
 
-
-
-
 myBananas=()=> {
    let pic = {
      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
