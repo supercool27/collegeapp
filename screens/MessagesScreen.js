@@ -6,61 +6,90 @@ import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { DataTable } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 
-const GetStudent_id= async() => {
+  const GetStudent_id= () => {
   const [myStudent_id,setMystudent_id] = useState();
-  const userdetails= await AsyncStorage.getItem("Otp_details");
-  const details = JSON.parse(userdetails);
-  setMystudent_id(details[0].student_id);
-  return details;
+  const userdetails= AsyncStorage.getItem("Otp_details");
+ // const details = JSON.parse(userdetails);
+  //setMystudent_id(details[0].student_id);
+  return userdetails;
 }
 
-const MessagesScreen = async() => {
+const MessagesScreen = () => {
   const [myData, setMyData] = useState([]);
+  const [feeData,setFeeData] = useState([]);
+ // console.log(JSON.stringify(myData));
   console.log('--------------------------------------message screen-------------------------------------------------');
-  var async_data = await GetStudent_id();
-  console.log(async_data[0].student_id);
-  console.log('--------------------------------------async data-----------------------------------------------------');
-  await fetch('http://3.108.170.236/erp/apis/fetch_current_academic_fees.php',{
+  //const async_data =  GetStudent_id();
+  // setTimeout(() => {
+    AsyncStorage.getItem("Otp_details").then((value)=> { // console.log(value);
+      setMyData(value);
+    });
+ // }, 6000);
+  
+  if(myData.length==0){
+      console.log('no data from async storage');
+  }
+  else {
+    const obj= JSON.parse(myData)
+    console.log(obj[0].student_id);
+     fetch('http://3.108.170.236/erp/apis/fetch_current_academic_fees.php',{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id: async_data[0].student_id})
+    body: JSON.stringify({ student_id: obj[0].student_id})
   })
     .then((response) => response.json())
-    .then((json) =>{
-      setMyData(json);
-      console.log(json);
+    .then((json) => { 
+      setFeeData(json);
+      console.log(feeData);
     })
     .catch((error) => {
       console.error(error);
     });
+  }
+ // console.log('--------------------------------------async data-----------------------------------------------------');
+  // await fetch('http://3.108.170.236/erp/apis/fetch_current_academic_fees.php',{
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({ student_id: async_data[0].student_id})
+  // })
+  //   .then((response) => response.json())
+  //   .then((json) => { //setMyData(json);
+  //     console.log(json)
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
 
+    //setTimeout(() => console.log(myData), 6000);
     
-renderItem = ({item}) => {
-  return (
-          <View>
-            <Text>
-                {item.current_due} {"\n"}
-                {item.sch_due_date}{"\n"}
-                {item.scholarship_amt}{"\n"}
-                {item.total_caution_money}{"\n"}
-                {item.total_sport_fee}{"\n"}
-                {item.total_paid_amt}{"\n"}
-                {item.book_bank_status}{"\n"}
-                {item.sum_applicable_scholarship}{"\n"}
-                {item.sch_due_date}{"\n"}
-            </Text>
-          </View>  //clg_id, cor_id, branch_id, sem_id, paid_done_date, due_date, current_due, scholarship_amt, total_caution_money, total_kit_fee, total_apron_fee, total_other_fee, total_sport_fee, total_book_bank, total_tution_fee, total_current_due, total_paid_amt, sum_book_bank, book_bank_status, sum_applicable_scholarship, sch_due_date
-        );
-      }
-  return (
+// renderItem = ({item}) => {
+//   return (
+//           <View>
+//             <Text>
+//                 {item.current_due} {"\n"}
+//                 {item.sch_due_date}{"\n"}
+//                 {item.scholarship_amt}{"\n"}
+//                 {item.total_caution_money}{"\n"}
+//                 {item.total_sport_fee}{"\n"}
+//                 {item.total_paid_amt}{"\n"}
+//                 {item.book_bank_status}{"\n"}
+//                 {item.sum_applicable_scholarship}{"\n"}
+//                 {item.sch_due_date}{"\n"}
+//             </Text>
+//           </View>  //clg_id, cor_id, branch_id, sem_id, paid_done_date, due_date, current_due, scholarship_amt, total_caution_money, total_kit_fee, total_apron_fee, total_other_fee, total_sport_fee, total_book_bank, total_tution_fee, total_current_due, total_paid_amt, sum_book_bank, book_bank_status, sum_applicable_scholarship, sch_due_date
+//         );
+//       }
+
+
+return (
     <View style={{flex:1,}}>
     <View style={{padding:10}}>
-            <FlatList 
+            {/* <FlatList 
               data={ myData }
               renderItem={renderItem}
               keyExtractor={( item, index ) => index.toString() }
               extraData={ myData }
-            />
+            /> */}
 
 <DataTable style={styles.container}>
 	<DataTable.Header style={styles.tableHeader}>
@@ -68,40 +97,36 @@ renderItem = ({item}) => {
 	    	Fees Details
     </DataTable.Title>
 	  <DataTable.Title>
-      
     </DataTable.Title>
-		<DataTable.Title>  
-
+		<DataTable.Title> 
     </DataTable.Title>
 	</DataTable.Header>
-
     <View style={styles.container}>
-      { myData && (
+      {/* { myData && (
         <View>
           <Text>Your Fees Details Goes Below : </Text>
             {
               myData.map((item,index) => 
                 (
-                  <View>
-                <Text key={item.id}>
-                { index }
-                { item.current_due } {"\n"}
-                { item.sch_due_date }{"\n"}
-                { item.scholarship_amt }{"\n"}
-                { item.total_caution_money }{"\n"}
-                { item.total_sport_fee }{"\n"}
-                { item.total_paid_amt }{"\n"}
-                { item.book_bank_status }{"\n"}
-                { item.sum_applicable_scholarship }{"\n"}
-                { item.sch_due_date }{"\n"}
-                </Text>
-                
-                  </View>
+                <View>
+                  <Text key={item.id}>
+                  { index }
+                  { item.current_due } {"\n"}
+                  { item.sch_due_date }{"\n"}
+                  { item.scholarship_amt }{"\n"}
+                  { item.total_caution_money }{"\n"}
+                  { item.total_sport_fee }{"\n"}
+                  { item.total_paid_amt }{"\n"}
+                  { item.book_bank_status }{"\n"}
+                  { item.sum_applicable_scholarship }{"\n"}
+                  { item.sch_due_date }{"\n"}
+                  </Text>
+                </View>
                 )
               )
             }
         </View>
-      )}
+      )} */}
     </View>
 	<DataTable.Row style={styles.paddingforleft}>
 		<DataTable.Cell>   Student Roll:     </DataTable.Cell>
