@@ -28,167 +28,132 @@ const MessagesScreen = () => {
   
   if(myData.length==0){
       console.log('no data from async storage');
+      return (
+        <View style={{flex:1,}}>
+          <View style={{padding:10}}>
+            <Text> Fees Details Goes Here </Text>
+          </View>
+        </View>
+      )  
   }
   else {
     const obj= JSON.parse(myData)
-    console.log(obj[0].student_id);
+    //console.log(obj[0].student_id);
      fetch('http://3.108.170.236/erp/apis/fetch_current_academic_fees.php',{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id: obj[0].student_id})
+   // body: JSON.stringify({ student_id: obj[0].student_id})
+    // body: JSON.stringify({ student_id: 729 })
   })
     .then((response) => response.json())
     .then((json) => { 
       setFeeData(json);
-      console.log(feeData);
+    //  console.log(feeData);
     })
     .catch((error) => {
       console.error(error);
     });
-  }
- // console.log('--------------------------------------async data-----------------------------------------------------');
-  // await fetch('http://3.108.170.236/erp/apis/fetch_current_academic_fees.php',{
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ student_id: async_data[0].student_id})
-  // })
-  //   .then((response) => response.json())
-  //   .then((json) => { //setMyData(json);
-  //     console.log(json)
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-
-    //setTimeout(() => console.log(myData), 6000);
-    
-// renderItem = ({item}) => {
-//   return (
-//           <View>
-//             <Text>
-//                 {item.current_due} {"\n"}
-//                 {item.sch_due_date}{"\n"}
-//                 {item.scholarship_amt}{"\n"}
-//                 {item.total_caution_money}{"\n"}
-//                 {item.total_sport_fee}{"\n"}
-//                 {item.total_paid_amt}{"\n"}
-//                 {item.book_bank_status}{"\n"}
-//                 {item.sum_applicable_scholarship}{"\n"}
-//                 {item.sch_due_date}{"\n"}
-//             </Text>
-//           </View>  //clg_id, cor_id, branch_id, sem_id, paid_done_date, due_date, current_due, scholarship_amt, total_caution_money, total_kit_fee, total_apron_fee, total_other_fee, total_sport_fee, total_book_bank, total_tution_fee, total_current_due, total_paid_amt, sum_book_bank, book_bank_status, sum_applicable_scholarship, sch_due_date
-//         );
-//       }
-
-
-return (
-    <View style={{flex:1,}}>
-    <View style={{padding:10}}>
-            {/* <FlatList 
-              data={ myData }
-              renderItem={renderItem}
-              keyExtractor={( item, index ) => index.toString() }
-              extraData={ myData }
-            /> */}
-
-<DataTable style={styles.container}>
-	<DataTable.Header style={styles.tableHeader}>
-		<DataTable.Title>
-	    	Fees Details
-    </DataTable.Title>
-	  <DataTable.Title>
-    </DataTable.Title>
-		<DataTable.Title> 
-    </DataTable.Title>
-	</DataTable.Header>
-    <View style={styles.container}>
-      {/* { myData && (
-        <View>
-          <Text>Your Fees Details Goes Below : </Text>
-            {
-              myData.map((item,index) => 
-                (
-                <View>
-                  <Text key={item.id}>
-                  { index }
-                  { item.current_due } {"\n"}
-                  { item.sch_due_date }{"\n"}
-                  { item.scholarship_amt }{"\n"}
-                  { item.total_caution_money }{"\n"}
-                  { item.total_sport_fee }{"\n"}
-                  { item.total_paid_amt }{"\n"}
-                  { item.book_bank_status }{"\n"}
-                  { item.sum_applicable_scholarship }{"\n"}
-                  { item.sch_due_date }{"\n"}
-                  </Text>
-                </View>
+    return (
+      <View style={{flex:1,}}>
+      <View style={{padding:10}}>
+  <DataTable style={styles.container}>
+    <DataTable.Header style={styles.tableHeader}>
+      <DataTable.Title>
+          Fees Details
+      </DataTable.Title>
+      <DataTable.Title>
+      </DataTable.Title>
+      <DataTable.Title> 
+      </DataTable.Title>
+    </DataTable.Header>
+      <View style={styles.container}>
+        { feeData && (
+          <View>
+              {
+                feeData.map((item,index) => 
+                  (
+                  <View>
+                    {/* <Text key={item.id}>
+                    { index }
+                    { item.current_due } {"\n"}
+                    { item.sch_due_date }{"\n"}
+                    { item.scholarship_amt }{"\n"}
+                   {"\n"}
+                    { item.total_sport_fee }{"\n"}
+                    { item.total_paid_amt }{"\n"}
+                    { item.book_bank_status }{"\n"}
+                    { item.sum_applicable_scholarship }{"\n"}
+                    { item.sch_due_date }{"\n"}
+                    </Text> */}
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Student Roll:     </DataTable.Cell>
+      <DataTable.Cell>   302902219312      </DataTable.Cell>
+      <DataTable.Cell>   </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Caution Money:</DataTable.Cell>
+      <DataTable.Cell>   { item.total_caution_money }</DataTable.Cell>
+      <DataTable.Cell>    </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Kit Fees:</DataTable.Cell>
+      <DataTable.Cell>   { item.sch_due_date }  </DataTable.Cell>
+      <DataTable.Cell>   20</DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Apron Fees:</DataTable.Cell>
+      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Other Fees:	</DataTable.Cell>
+      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Sport Fees:</DataTable.Cell>
+      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>    </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Book Bank Fees:</DataTable.Cell>
+      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>    </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Scholarship:</DataTable.Cell>
+      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Tution Fees:</DataTable.Cell>
+      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell></DataTable.Cell>
+    </DataTable.Row>
+    </View>
+    )
                 )
-              )
-            }
-        </View>
-      )} */}
-    </View>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Student Roll:     </DataTable.Cell>
-		<DataTable.Cell>   302902219312      </DataTable.Cell>
-		<DataTable.Cell>   </DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Caution Money:</DataTable.Cell>
-		<DataTable.Cell>   0</DataTable.Cell>
-		<DataTable.Cell>    </DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Kit Fees:</DataTable.Cell>
-		<DataTable.Cell>   0  </DataTable.Cell>
-		<DataTable.Cell>   20</DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Apron Fees:</DataTable.Cell>
-		<DataTable.Cell>   0</DataTable.Cell>
-		<DataTable.Cell>   </DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Other Fees:	</DataTable.Cell>
-		<DataTable.Cell>   0</DataTable.Cell>
-		<DataTable.Cell>   </DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Sport Fees:</DataTable.Cell>
-		<DataTable.Cell>   150</DataTable.Cell>
-		<DataTable.Cell>    </DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Book Bank Fees:</DataTable.Cell>
-		<DataTable.Cell>   1000</DataTable.Cell>
-		<DataTable.Cell>    </DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Scholarship:</DataTable.Cell>
-		<DataTable.Cell>   0</DataTable.Cell>
-		<DataTable.Cell>   </DataTable.Cell>
-	</DataTable.Row>
-	<DataTable.Row style={styles.paddingforleft}>
-		<DataTable.Cell>   Tution Fees:</DataTable.Cell>
-		<DataTable.Cell>   12500</DataTable.Cell>
-		<DataTable.Cell></DataTable.Cell>
-	</DataTable.Row>
-	</DataTable> 
-            {/* { 
-            myData.map((data,index)=>{ 
-              {data.current_due} {"\n"}
-                {data.sch_due_date}{"\n"}
-                {data.scholarship_amt}{"\n"}
-                {data.total_caution_money}{"\n"}
-                {data.total_sport_fee}{"\n"}
-                {data.total_paid_amt}{"\n"}
-                {data.book_bank_status}{"\n"}
-                {data.sum_applicable_scholarship}{"\n"}
-                {data.sch_due_date}{"\n"}
-            })} */}
-    </View>
-    </View>
-  )
+              }
+          </View>
+        )}
+      </View>
+      </DataTable> 
+              {/* { 
+              myData.map((data,index)=>{ 
+                {data.current_due} {"\n"}
+                  {data.sch_due_date}{"\n"}
+                  {data.scholarship_amt}{"\n"}
+                  {data.total_caution_money}{"\n"}
+                  {data.total_sport_fee}{"\n"}
+                  {data.total_paid_amt}{"\n"}
+                  {data.book_bank_status}{"\n"}
+                  {data.sum_applicable_scholarship}{"\n"}
+                  {data.sch_due_date}{"\n"}
+              })} */}
+      </View>
+      </View>
+    )   
+  }
 }
 
 const styles = StyleSheet.create({
@@ -206,9 +171,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#DCDCDC',
   },
   paddingforleft:{
-   width:400,
+
    padding:5
   }
+
+  
+
 });
 
 
