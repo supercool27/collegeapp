@@ -12,24 +12,56 @@ import {
 } from 'react-native';
 import AllInOneSDKManager from 'paytm_allinone_react-native';
 
+
+
 const CartScreen = () => {
-  const [mid, setMid] = useState('AliSub58582630351896');
-  const [orderId, setOrderId] = useState('PARCEL15942011933');
+
+
+  const [mid, setMid] = useState('GDREdu50085170778323');
+  const [orderId, setOrderId] = useState('15942011933');
   const [amount, setAmount] = useState('1');
   const [urlScheme, setURLScheme] = useState('');
   const [tranxToken, setTranxToken] = useState('b9097bda72af4db0a9aa2d00e58a7d451594201196818');
+  const [checksumData, setChecksumData] = useState([]);
   const [showToast, setShowToast] = useState('');
   const [isStaging, setIsStaging] = useState(false);
   const [appInvokeRestricted, setIsAppInvokeRestricted] = useState(false);
   const [result, setResult] = useState('');
-
+ 
   const [isOrderIdUpdated, setOrderIdUpdated] = useState(false);
+  
   useEffect(() => {
     if (!isOrderIdUpdated) {
       generateOrderId();
       setOrderIdUpdated(true);
+      generateCheckSumData();
     }
   });
+
+
+  const generateCheckSumData = () => {
+    console.log('----------------------------------CartScreen----------------------------');
+  //console.log(obj[0].student_id);
+  fetch('http://3.108.170.236/erp/apis/paytm_send_link.php',{
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  // body: JSON.stringify({ student_id: obj[0].student_id})
+  // body: JSON.stringify({ student_id: 729 })
+  })
+  .then((response) => response.json())
+  .then((json) => {
+    //setChecksumData(json);
+    //setTranxToken(json);
+
+   // console.log(json);
+    console.log(json);
+    //console.log(obj);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+  
+  }
 
   const generateOrderId = () => {
     const r = Math.random() * new Date().getMilliseconds();
@@ -40,7 +72,9 @@ const CartScreen = () => {
         (Math.floor(r % 100000) + 10000),
     );
   };
+
   const startRawTransaction = async () => {
+    //console.log(tranxToken);
     setShowToast('');
     setResult('');
     AllInOneSDKManager.startTransaction(
