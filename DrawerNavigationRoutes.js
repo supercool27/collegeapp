@@ -77,6 +77,13 @@ const SettingScreenStack = ({navigation}) => {
           title: 'Fees', //Set Header Title
         }}
       />
+            <Stack.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{
+          title: 'Fees Details', //Set Header Title
+        }}
+      />
     </Stack.Navigator>
   );
 };

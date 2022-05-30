@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, FlatList,StyleSheet } from 'react-native';
+import { View, Text, FlatList,StyleSheet,ScrollView,SafeAreaView} from 'react-native';
 import FlatListDemo from '../Components/FlatListDemo';
 import TableExample from'../Components/DataTable';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
@@ -9,12 +9,19 @@ import AsyncStorage from '@react-native-community/async-storage';
   const GetStudent_id= () => {
   const [myStudent_id,setMystudent_id] = useState();
   const userdetails= AsyncStorage.getItem("Otp_details");
- // const details = JSON.parse(userdetails);
+  // const details = JSON.parse(userdetails);
   //setMystudent_id(details[0].student_id);
   return userdetails;
 }
 
 const MessagesScreen = () => {
+
+  useEffect(()=>{
+
+    
+
+  },[]);
+
   const [myData, setMyData] = useState([]);
   const [feeData,setFeeData] = useState([]);
  // console.log(JSON.stringify(myData));
@@ -42,18 +49,20 @@ const MessagesScreen = () => {
      fetch('http://3.108.170.236/erp/apis/fetch_current_academic_fees.php',{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-   // body: JSON.stringify({ student_id: obj[0].student_id})
-    // body: JSON.stringify({ student_id: 729 })
+    //body: JSON.stringify({ student_id: obj[0].student_id})
+     body: JSON.stringify({ student_id: 1398 })
   })
     .then((response) => response.json())
     .then((json) => { 
       setFeeData(json);
-    //  console.log(feeData);
+     console.log(feeData);
     })
     .catch((error) => {
       console.error(error);
     });
     return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
       <View style={{flex:1,}}>
       <View style={{padding:10}}>
   <DataTable style={styles.container}>
@@ -87,47 +96,47 @@ const MessagesScreen = () => {
                     </Text> */}
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Student Roll:     </DataTable.Cell>
-      <DataTable.Cell>   302902219312      </DataTable.Cell>
+      <DataTable.Cell>         </DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Caution Money:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_caution_money }</DataTable.Cell>
+      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
       <DataTable.Cell>    </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Kit Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.sch_due_date }  </DataTable.Cell>
-      <DataTable.Cell>   20</DataTable.Cell>
+      <DataTable.Cell>   { item.total_academic_fine_days }  </DataTable.Cell>
+      <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Apron Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Other Fees:	</DataTable.Cell>
-      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Sport Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
       <DataTable.Cell>    </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Book Bank Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   { item.total_book_bank }</DataTable.Cell>
       <DataTable.Cell>    </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Scholarship:</DataTable.Cell>
-      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Tution Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.sch_due_date }</DataTable.Cell>
+      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
       <DataTable.Cell></DataTable.Cell>
     </DataTable.Row>
     </View>
@@ -137,7 +146,7 @@ const MessagesScreen = () => {
           </View>
         )}
       </View>
-      </DataTable> 
+  </DataTable> 
               {/* { 
               myData.map((data,index)=>{ 
                 {data.current_due} {"\n"}
@@ -152,6 +161,9 @@ const MessagesScreen = () => {
               })} */}
       </View>
       </View>
+      </ScrollView>
+      </SafeAreaView>
+    
     )   
   }
 }
@@ -164,19 +176,19 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   container: {
-    padding: 15,
-    justifyContent: 'center'
+    flex: 1,
+  },
+  scrollView: {
+    backgroundColor: '#9387F1',
+    marginHorizontal: 20,
   },
   tableHeader: {
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#9336F1',
   },
   paddingforleft:{
 
-   padding:5
+   padding:1
   }
-
-  
-
 });
 
 
