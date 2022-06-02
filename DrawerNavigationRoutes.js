@@ -16,6 +16,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import CustomDrawer from './Components/CustomDrawer';
 import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
+import FeesScreen from './screens/FeesScreen';
 import MomentsScreen from './screens/MomentsScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import GameDetailsScreen from './screens/GameDetailsScreen';
@@ -77,7 +78,7 @@ const SettingScreenStack = ({navigation}) => {
           title: 'Fees', //Set Header Title
         }}
       />
-            <Stack.Screen
+      <Stack.Screen
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
@@ -160,6 +161,17 @@ const DrawerNavigatorRoutes = (props) => {
           ),
         }}
       />
+
+    <Drawer.Screen
+        name="Fees Details"
+        component={FeesScreen}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="ic:outline-feed" size={22} color={color} />
+          ),
+        }}
+      />
+
       {/* <Drawer.Screen
         name="Scolorship"
         component={MomentsScreen}
