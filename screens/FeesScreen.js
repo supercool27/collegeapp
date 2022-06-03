@@ -37,16 +37,16 @@ const FeesScreen = () => {
             <Text> Fees Details Goes Here </Text>
           </View>
         </View>
-      )  
+      )
   }
   else {
     const obj= JSON.parse(myData)
     //console.log(obj[0].student_id);
-    fetch('http://3.108.170.236/erp/apis/fetch_current_academic_fees.php',{
+    fetch('http://3.108.170.236/erp/apis/fetch_current_academic_total_fees.php',{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id: obj[0].student_id})
-    //body: JSON.stringify({ student_id: 3370 })
+   //body: JSON.stringify({ student_id: obj[0].student_id})
+   // body: JSON.stringify({ student_id: 3370 })
   })
     .then((response) => response.json())
     .then((json) => { 
@@ -76,66 +76,53 @@ const FeesScreen = () => {
         { feeData && (
           <View>
               {
-                feeData.slice(0,1).map((item,index) => 
-                //feeData.map((item,index) =>
+                feeData.map((item,index) => 
                 (
-                  <View>
-                    {/* <Text key={item.id}>
-                    { index }
-                    { item.current_due } {"\n"}
-                    { item.sch_due_date }{"\n"}
-                    { item.scholarship_amt }{"\n"}
-                   {"\n"}
-                    { item.total_sport_fee }{"\n"}
-                    { item.total_paid_amt }{"\n"}
-                    { item.book_bank_status }{"\n"}
-                    { item.sum_applicable_scholarship }{"\n"}
-                    { item.sch_due_date }{"\n"}
-                    </Text> */}
-    <DataTable.Row style={styles.paddingforleft}>
-      <DataTable.Cell>   Student Roll:     </DataTable.Cell>
-      <DataTable.Cell>      {index}   </DataTable.Cell>
-      <DataTable.Cell>   </DataTable.Cell>
-    </DataTable.Row>
+  <View>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Caution Money:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
+      <DataTable.Cell>   { item.caution_money }</DataTable.Cell>
       <DataTable.Cell>    </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Kit Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_academic_fine_days }  </DataTable.Cell>
+      <DataTable.Cell>   { item.kit_fee }  </DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Apron Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
+      <DataTable.Cell>   { item.apron_fee }</DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Other Fees:	</DataTable.Cell>
-      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
+      <DataTable.Cell>   { item.other_fee }</DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Sport Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
+      <DataTable.Cell>   { item.sport_fee }</DataTable.Cell>
       <DataTable.Cell>    </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Book Bank Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_book_bank }</DataTable.Cell>
+      <DataTable.Cell>   { item.book_bank_fee }</DataTable.Cell>
       <DataTable.Cell>    </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
-      <DataTable.Cell>   Scholarship:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
+      <DataTable.Cell>   Tution Fees:</DataTable.Cell>
+      <DataTable.Cell>   { item.tution_fee }</DataTable.Cell>
       <DataTable.Cell>   </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
+      <DataTable.Cell>   Tution Fees: </DataTable.Cell>
+      <DataTable.Cell> {item.all_remark}  </DataTable.Cell>
+      <DataTable.Cell>  </DataTable.Cell>
+    </DataTable.Row>
+    <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Tution Fees:</DataTable.Cell>
-      <DataTable.Cell>   { item.total_academic_fine_days }</DataTable.Cell>
-      <DataTable.Cell></DataTable.Cell>
+      <DataTable.Cell> {item.all_remark} </DataTable.Cell>
+      <DataTable.Cell> </DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row style={styles.paddingforleft}>
       <DataTable.Cell>   Tution Fees:</DataTable.Cell>
@@ -145,14 +132,11 @@ const FeesScreen = () => {
       <Button
           title="Pay Now"
           onPress={() => {
-            
-
-
           } }
         />
       </DataTable.Cell>
     </DataTable.Row>
-                  </View>
+  </View>
                 )
                 )
               }
@@ -161,18 +145,6 @@ const FeesScreen = () => {
       }
       </View>
   </DataTable> 
-              {/* { 
-              myData.map((data,index)=>{ 
-                {data.current_due} {"\n"}
-                  {data.sch_due_date}{"\n"}
-                  {data.scholarship_amt}{"\n"}
-                  {data.total_caution_money}{"\n"}
-                  {data.total_sport_fee}{"\n"}
-                  {data.total_paid_amt}{"\n"}
-                  {data.book_bank_status}{"\n"}
-                  {data.sum_applicable_scholarship}{"\n"}
-                  {data.sch_due_date}{"\n"}
-              })} */}
       </View>
       </View>
       </ScrollView>
@@ -183,24 +155,19 @@ const FeesScreen = () => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "blue",
     color: "white",
     padding: 2,
     margin: 2,
   },
   container: {
     flex: 1,
-
   },
   scrollView: {
-    backgroundColor: '#9387F1',
     marginHorizontal: 20,
   },
   tableHeader: {
-    backgroundColor: '#9336F1',
   },
   paddingforleft:{
-
    padding:1
   }
 });

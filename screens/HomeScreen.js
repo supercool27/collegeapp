@@ -45,6 +45,22 @@ const sliderData = [
     title: 'Second Game',
     image: require('../Assets/Images/homescreen/game-2.jpeg'),
   },
+  {
+    title: 'Second Game',
+    image: require('../Assets/Images/homescreen/game-2.jpeg'),
+  },
+  {
+    title: 'Second Game',
+    image: require('../Assets/Images/homescreen/game-2.jpeg'),
+  },
+  {
+    title: 'Second Game',
+    image: require('../Assets/Images/homescreen/game-2.jpeg'),
+  },
+  {
+    title: 'Second Game',
+    image: require('../Assets/Images/homescreen/game-2.jpeg'),
+  },
   // {
   //   title: 'Third Game',
   //   image: require('./Assets/Images/homescreen/game-3.png'),
@@ -111,8 +127,6 @@ itemWidth={SLIDER_WIDTH}
 autoplay={true}
 />
 
-
-        
         <View>   
             <StudentScreen/>
         </View>

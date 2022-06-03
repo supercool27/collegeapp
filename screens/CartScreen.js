@@ -12,11 +12,8 @@ import {
 } from 'react-native';
 import AllInOneSDKManager from 'paytm_allinone_react-native';
 
-
-
 const CartScreen = () => {
-
-
+  
   const [mid, setMid] = useState('GDREdu50085170778323');
   const [orderId, setOrderId] = useState('15942011933');
   const [amount, setAmount] = useState('1');
@@ -27,7 +24,6 @@ const CartScreen = () => {
   const [isStaging, setIsStaging] = useState(false);
   const [appInvokeRestricted, setIsAppInvokeRestricted] = useState(false);
   const [result, setResult] = useState('');
- 
   const [isOrderIdUpdated, setOrderIdUpdated] = useState(false);
   
   useEffect(() => {
@@ -38,23 +34,26 @@ const CartScreen = () => {
     }
   });
 
-
   const generateCheckSumData = () => {
-    console.log('----------------------------------CartScreen----------------------------');
+  console.log('----------------------------------CartScreen----------------------------');
   //console.log(obj[0].student_id);
   fetch('http://3.108.170.236/erp/apis/paytm_send_link.php',{
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  // body: JSON.stringify({ student_id: obj[0].student_id})
+   body: JSON.stringify({ order_id: orderId,
+                          mid: mid
+  })
   // body: JSON.stringify({ student_id: 729 })
   })
   .then((response) => response.json())
   .then((json) => {
     //setChecksumData(json);
-    //setTranxToken(json);
-
+    setTimeout(() => {
+      setTranxToken(json.body.txnToken);
+    }, 3000);
+   
    // console.log(json);
-    console.log(json);
+    console.log(tranxToken);
     //console.log(obj);
   })
   .catch((error) => {
@@ -71,6 +70,7 @@ const CartScreen = () => {
         'b' +
         (Math.floor(r % 100000) + 10000),
     );
+    console.log(orderId);
   };
 
   const startRawTransaction = async () => {

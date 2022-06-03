@@ -127,11 +127,8 @@ const CustomDrawer = props => {
                     color: '#ffffff',
                     fontSize: 15,
                     fontFamily: 'Roboto-Medium',
-                   
                     flex:1,
                     fontWeight:'bold',
-                 
-                    
                   }}>
                   {' '}
                   {item.stud_name}{' '}

@@ -167,7 +167,7 @@ const DrawerNavigatorRoutes = (props) => {
         component={FeesScreen}
         options={{
           drawerIcon: ({color}) => (
-            <Ionicons name="ic:outline-feed" size={22} color={color} />
+            <Ionicons name="list-outline" size={22} color={color} />
           ),
         }}
       />
