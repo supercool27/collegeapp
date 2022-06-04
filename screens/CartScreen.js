@@ -15,66 +15,182 @@ import AllInOneSDKManager from 'paytm_allinone_react-native';
 const CartScreen = () => {
   
   const [mid, setMid] = useState('GDREdu50085170778323');
-  const [orderId, setOrderId] = useState('15942011933');
+  const [orderId, setOrderId] = useState('12345678990');
   const [amount, setAmount] = useState('1');
   const [urlScheme, setURLScheme] = useState('');
-  const [tranxToken, setTranxToken] = useState('b9097bda72af4db0a9aa2d00e58a7d451594201196818');
+  const [tranxToken, setTranxToken] = useState('');
   const [checksumData, setChecksumData] = useState([]);
   const [showToast, setShowToast] = useState('');
   const [isStaging, setIsStaging] = useState(false);
   const [appInvokeRestricted, setIsAppInvokeRestricted] = useState(false);
   const [result, setResult] = useState('');
-  const [isOrderIdUpdated, setOrderIdUpdated] = useState(false);
-  
+  const [isOrderIdUpdated, setOrderIdUpdated] = useState(true);
+
+ // bank details trasaction for saving trasaction details //
+
+  const [BANKTXNID, setBANKTXNID] = useState('');
+  const [CHECKSUMHASH, setCHECKSUMHASH] = useState('');
+  const [CURRENCY, setCURRENCY] = useState('');
+  const [GATEWAYNAME, setGATEWAYNAME] = useState('');
+  const [MID, setMID] = useState('');
+  const [ORDERID, setORDERID] = useState('');
+  const [PAYMENTMODE, setPAYMENTMODE] = useState('');
+  const [RESPCODE, setRESPCODE] = useState('');
+  const [RESPMSG, setRESPMSG] = useState('');
+  const [STATUS, setSTATUS] = useState('');
+  const [TXNAMOUNT, setTXNAMOUNT] = useState('');
+  const [TXNDATE, setTXNDATE] = useState('');
+  const [TXNID, setTXNID] = useState('');
+
+ // bank details trasaction for saving trasaction details //
+
   useEffect(() => {
+   setTimeout(() => 
+   {
     if (!isOrderIdUpdated) {
-      generateOrderId();
+      setTimeout(() => {
+        setTimeout(() => {
+          generateOrderId();
+        }, 2000);
       setOrderIdUpdated(true);
-      generateCheckSumData();
+      setTimeout(() => {
+        generateCheckSumData();
+      }, 2000);
+      }, 2000);
     }
-  });
+    else{
+      setTimeout(() => {
+
+      setTimeout(() => {
+        generateCheckSumData();
+      }, 2000);
+      }, 2000);
+        }
+  }, 2000);
+  },[]);
 
   const generateCheckSumData = () => {
-  console.log('----------------------------------CartScreen----------------------------');
+  console.log('----------------------------------CartScreen---------------------------------');
   //console.log(obj[0].student_id);
-  fetch('http://3.108.170.236/erp/apis/paytm_send_link.php',{
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-   body: JSON.stringify({ order_id: orderId,
-                          mid: mid
-  })
-  // body: JSON.stringify({ student_id: 729 })
-  })
-  .then((response) => response.json())
-  .then((json) => {
-    //setChecksumData(json);
-    setTimeout(() => {
-      setTranxToken(json.body.txnToken);
-    }, 3000);
-   
-   // console.log(json);
-    console.log(tranxToken);
-    //console.log(obj);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
   
-  }
+    try{
+      fetch('http://3.108.170.236/erp/apis/paytm_app_stagging.php',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ order_id: orderId,
+                               mid: mid,
+        })
+        //body: JSON.stringify({ student_id: 729 })
+        })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setChecksumData(json);
+          setTimeout(() => {
+            setTranxToken(json.body.txnToken);
+            console.log(json);
+            console.log(tranxToken);
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    catch(e){
+      console.log(e);
+    }
+   
+// try{
+//         fetch('http://3.108.170.236/erp/apis/paytm__payment__data__response.php',{
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         })
+//         .then((response) => response.json())
+//         .then((json) => {
+//           console.log(json);
+//           setTimeout(() => {
+//             json.map((data,index)=>{
+//               setBANKTXNID(data.BANKTXNID);
+//               setCHECKSUMHASH(data.CHECKSUMHASH);
+//               setCURRENCY(data.CURRENCY);
+//               setGATEWAYNAME(data.GATEWAYNAME);
+//               setMID(data.MID);
+//               setORDERID(data.ORDERID);
+//               setPAYMENTMODE(data.PAYMENTMODE);
+//               setRESPCODE(data.RESPCODE);
+//               setRESPMSG(data.RESPMSG);
+//               setSTATUS(data.STATUS);
+//               setTXNAMOUNT(data.TXNAMOUNT);
+//               setTXNDATE(data.TXNDATE);
+//               setTXNID(data.TXNID);
+     
+//                })
+//           }, 2000);
+
+//           try{
+//             fetch('http://3.108.170.236/erp/apis/paytm__app__transaction__save.php',{
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({ BANKTXNID: BANKTXNID,
+//               CHECKSUMHASH: CHECKSUMHASH,
+//               CURRENCY:CURRENCY,
+//               GATEWAYNAME:GATEWAYNAME,
+//               MID:MID,
+//               ORDERID:ORDERID,
+//               PAYMENTMODE:PAYMENTMODE,
+//               RESPCODE:RESPCODE,
+//               RESPMSG:RESPMSG,
+//               STATUS:STATUS,
+//               TXNAMOUNT:TXNAMOUNT,
+//               TXNDATE:TXNDATE,
+//               TXNID:TXNID,
+//             })
+            
+//             })
+//             .then((response) => response.json())
+//             .then((json) => {
+//               console.log(json);
+    
+//             })
+//             .catch((error) => {
+//               console.error(error);
+//             });
+//         }
+//         catch(e){
+//           console.log(e);
+//         }
+
+//         })
+//         .catch((error) => {
+//           console.error(error);
+//         });
+//     }
+//     catch(e){
+//       console.log(e);
+//     }
+
+}
 
   const generateOrderId = () => {
     const r = Math.random() * new Date().getMilliseconds();
-    setOrderId(
-      'PARCEL' +
-        (1 + Math.floor(r % 2000) + 10000) +
-        'b' +
-        (Math.floor(r % 100000) + 10000),
-    );
-    console.log(orderId);
+    setTimeout(() => {
+      setOrderId(
+        'PARCEL' +
+          (1 + Math.floor(r % 2000) + 10000) +
+          'b' +
+          (Math.floor(r % 100000) + 10000),
+      );
+    }, 2000);
+
+  //console.log(orderId);
+
   };
 
   const startRawTransaction = async () => {
-    //console.log(tranxToken);
+    try{
+    console.log(tranxToken);
+    console.log(orderId);
     setShowToast('');
     setResult('');
     AllInOneSDKManager.startTransaction(
@@ -93,10 +209,13 @@ const CartScreen = () => {
       setOrderIdUpdated(false);
     })
     .catch((err) => {
+      console.log(err);
       setResult(err);
       setShowToast("Error: " + err);
       setOrderIdUpdated(false);
     });
+    }
+    catch(e){console.log(e)}
 }
    return (
     <>
@@ -105,106 +224,6 @@ const CartScreen = () => {
         <ScrollView>
           <View>
             <View style={{margin: 16}}>
-              <Text style={styles.textStyle}>Merchant Id</Text>
-              <TextInput
-                style={styles.textInput}
-                defaultValue={mid}
-                onChangeText={(e) => setMid(e)}
-              />
-              <Text style={styles.textStyle}>Order Id</Text>
-              <TextInput
-                style={styles.textInput}
-                defaultValue={orderId}
-                onChangeText={(e) => setOrderId(e)}
-              />
-              <Text style={styles.textStyle}>URL Scheme</Text>
-              <TextInput
-                style={styles.textInput}
-                defaultValue={urlScheme}
-                onChangeText={(e) => setURLScheme(e)}
-              />
-              <Text style={styles.textStyle}>Amount</Text>
-              <TextInput
-                style={styles.textInput}
-                keyboardType="numeric"
-                defaultValue={amount}
-                onChangeText={(e) => setAmount(e)}
-              />
-              <Text style={styles.textStyle}>Transaction token</Text>
-              <TextInput
-                style={styles.textInput}
-                defaultValue={tranxToken}
-                onChangeText={(e) => setTranxToken(e)}
-              />
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: 20,
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    flex: 1,
-                  }}>
-                  <Text
-                    style={{
-                      fontSize: 19,
-                      fontWeight: 'bold',
-                    }}>
-                    Staging : {isStaging ? 'true' : 'false'}
-                    </Text>
-                    </View>
-
-                    <View
-                  style={{
-                    flex: 1,
-                  }}>
-                    <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={isStaging ? "#f5dd4b" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={() =>
-                      isStaging ? setIsStaging(false) : setIsStaging(true)
-                    }
-                    value={isStaging}
-                  />
-                </View>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: 20,
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-              <View
-                  style={{
-                    flex: 1,
-                  }}>
-                  <Text
-                    style={{
-                      fontSize: 19,
-                      fontWeight: 'bold',
-                    }}>
-                    isInvokeRestricted : {appInvokeRestricted ? 'true' : 'false'}
-                    </Text>
-                    </View>
-                    <View
-                  style={{
-                    flex: 0.5,
-                  }}>
-                    <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={appInvokeRestricted ? "#f5dd4b" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={() =>
-                      appInvokeRestricted ? setIsAppInvokeRestricted(false) : setIsAppInvokeRestricted(true)
-                    }
-                    value={appInvokeRestricted}
-                  />
-                </View>
-                </View>
               <View style={styles.buttonStyle}>
                 <Button
                   title="Start Transaction"
