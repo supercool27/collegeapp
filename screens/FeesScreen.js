@@ -45,7 +45,7 @@ const FeesScreen = () => {
     fetch('http://3.108.170.236/erp/apis/fetch_current_academic_total_fees.php',{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-   //body: JSON.stringify({ student_id: obj[0].student_id})
+   body: JSON.stringify({ student_id: obj[0].student_id})
    // body: JSON.stringify({ student_id: 3370 })
   })
     .then((response) => response.json())

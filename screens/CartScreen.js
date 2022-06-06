@@ -11,11 +11,13 @@ import {
   Switch
 } from 'react-native';
 import AllInOneSDKManager from 'paytm_allinone_react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const CartScreen = () => {
   
   const [mid, setMid] = useState('GDREdu50085170778323');
-  const [orderId, setOrderId] = useState('5877878679078');
+  const [orderId, setOrderId] = useState('111');
+  console.log(orderId+'starting');
   const [amount, setAmount] = useState('1');
   const [urlScheme, setURLScheme] = useState('');
   const [tranxToken, setTranxToken] = useState('');
@@ -24,7 +26,7 @@ const CartScreen = () => {
   const [isStaging, setIsStaging] = useState(false);
   const [appInvokeRestricted, setIsAppInvokeRestricted] = useState(false);
   const [result, setResult] = useState('');
-  const [isOrderIdUpdated, setOrderIdUpdated] = useState(true);
+  const [isOrderIdUpdated, setOrderIdUpdated] = useState(false);
 
   //bank details trasaction for saving trasaction details//
 
@@ -54,7 +56,8 @@ const CartScreen = () => {
       setTimeout(() => {
         setTimeout(() => {
           generateOrderId();
-        }, 1000);
+          console.log(orderId);
+        }, 2000);
       setTimeout(() => {
         setOrderIdUpdated(true);
       }, 2000);
@@ -64,21 +67,36 @@ const CartScreen = () => {
       }, 2000);
     }
     else{
-        setTimeout(() => {
-          console.log('In else condition.......................................');
-        setTimeout(() => {
-          generateCheckSumData();
-        }, 2000);
-        }, 2000);
+        // setTimeout(() => {
+        //   console.log('In else condition.......................................');
+        // setTimeout(() => {
+        //   setTimeout(() => {
+        //     generateOrderId();
+        //   }, 1000);
+        //   setOrderIdUpdated(true);
+        //   generateCheckSumData();
+        // }, 2000);
+        // }, 2000);
       }
     }, 2000);
     },[]);
+
+
+  // useEffect(() => {
+  //   if (isOrderIdUpdated) {
+  //     setTimeout(() => {
+  //       generateOrderId();
+  //       setOrderIdUpdated(false);  
+  //     }, 2000);
+  //   }
+  // });
+
 
   const generateCheckSumData = () => {
   console.log('----------------------------------CartScreen---------------------------------');
   //console.log(obj[0].student_id);
 
-  
+  console.log('orderid'+orderId);
     try{
       fetch('http://3.108.170.236/erp/apis/paytm_app_stagging.php',{
         method: 'POST',
@@ -180,7 +198,14 @@ const CartScreen = () => {
   const generateOrderId = () => {
     const r = Math.random() * new Date().getMilliseconds();
     setTimeout(() => {
-      
+      // try {
+      //   AsyncStorage.setItem('order_id',  'PARCEL' +
+      //   (1 + Math.floor(r % 2000) + 10000) +
+      //   'b' +
+      //   (Math.floor(r % 100000) + 10000))
+      // } catch(e) {
+      //   // save error
+      // }
       setOrderId(
         'PARCEL' +
           (1 + Math.floor(r % 2000) + 10000) +
@@ -189,14 +214,24 @@ const CartScreen = () => {
       );
     }, 2000);
 
-  //console.log(orderId);
+  console.log(orderId);
 
   };
 
   const startRawTransaction = async () => {
     try{
+
+
+      // try {
+      //   const order_id = await AsyncStorage.getItem('@order_id')
+      //   order_idjson= JSON.parse(order_id);
+      // } catch(e) {
+      //   // read error
+      // }
+
     console.log(tranxToken);
     console.log(orderId);
+    //console.log(order_idjson);
     setShowToast('');
     setResult('');
     AllInOneSDKManager.startTransaction(
