@@ -14,6 +14,7 @@ import TableExample from '../Components/DataTable';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {DataTable} from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
+import { color } from 'react-native-reanimated';
 
 const GetStudent_id = () => {
   const [myStudent_id, setMystudent_id] = useState();
@@ -184,11 +185,14 @@ const MessagesScreen = () => {
                                 fontWeight: 'bold',
                                 fontSize: 25,
                               }}>
-                              Academic Days
+                              Fine in Tution fees 
+                              {'\n'} 
+                              fine = 25 * days :
                             </DataTable.Cell>
                             <DataTable.Cell></DataTable.Cell>
                             <DataTable.Cell>
-                              {item.total_academic_fine_days}
+                           
+                            {item.total_academic_fine_days}
                             </DataTable.Cell>
                           </DataTable.Row>
                           <DataTable.Row>
@@ -198,7 +202,7 @@ const MessagesScreen = () => {
                                 fontWeight: 'bold',
                                 fontSize: 25,
                               }}>
-                              Academic fine Amount
+                              Total fine on Tutions fees
                             </DataTable.Cell>
                             <DataTable.Cell></DataTable.Cell>
                             <DataTable.Cell>
@@ -212,11 +216,15 @@ const MessagesScreen = () => {
                                 fontWeight: 'bold',
                                 fontSize: 25,
                               }}>
-                              Scholarship fine Days
+                              fine in Scholarship 
+                              {'\n'}
+                              fine = 25 * days :
                             </DataTable.Cell>
+                            
                             <DataTable.Cell></DataTable.Cell>
                             <DataTable.Cell>
-                              {item.total_sch_fine_days}
+                              
+                              { item.total_sch_fine_days }
                             </DataTable.Cell>
                           </DataTable.Row>
                           <DataTable.Row>
@@ -226,7 +234,7 @@ const MessagesScreen = () => {
                                 fontWeight: 'bold',
                                 fontSize: 25,
                               }}>
-                              Scholarship fine Amount
+                            Total fine on Scholarship
                             </DataTable.Cell>
                             <DataTable.Cell></DataTable.Cell>
                             <DataTable.Cell>

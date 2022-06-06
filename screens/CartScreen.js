@@ -15,7 +15,7 @@ import AllInOneSDKManager from 'paytm_allinone_react-native';
 const CartScreen = () => {
   
   const [mid, setMid] = useState('GDREdu50085170778323');
-  const [orderId, setOrderId] = useState('12345678990');
+  const [orderId, setOrderId] = useState('5877878679078');
   const [amount, setAmount] = useState('1');
   const [urlScheme, setURLScheme] = useState('');
   const [tranxToken, setTranxToken] = useState('');
@@ -26,7 +26,7 @@ const CartScreen = () => {
   const [result, setResult] = useState('');
   const [isOrderIdUpdated, setOrderIdUpdated] = useState(true);
 
- // bank details trasaction for saving trasaction details //
+  //bank details trasaction for saving trasaction details//
 
   const [BANKTXNID, setBANKTXNID] = useState('');
   const [CHECKSUMHASH, setCHECKSUMHASH] = useState('');
@@ -45,29 +45,34 @@ const CartScreen = () => {
  // bank details trasaction for saving trasaction details //
 
   useEffect(() => {
+
+  console.log('--------------------------------------use effect ---------------------------------------');
    setTimeout(() => 
    {
     if (!isOrderIdUpdated) {
+     console.log('In if condtion----------------------------------'); 
       setTimeout(() => {
         setTimeout(() => {
           generateOrderId();
-        }, 2000);
-      setOrderIdUpdated(true);
+        }, 1000);
+      setTimeout(() => {
+        setOrderIdUpdated(true);
+      }, 2000);
       setTimeout(() => {
         generateCheckSumData();
       }, 2000);
       }, 2000);
     }
     else{
-      setTimeout(() => {
-
-      setTimeout(() => {
-        generateCheckSumData();
-      }, 2000);
-      }, 2000);
-        }
-  }, 2000);
-  },[]);
+        setTimeout(() => {
+          console.log('In else condition.......................................');
+        setTimeout(() => {
+          generateCheckSumData();
+        }, 2000);
+        }, 2000);
+      }
+    }, 2000);
+    },[]);
 
   const generateCheckSumData = () => {
   console.log('----------------------------------CartScreen---------------------------------');
@@ -175,6 +180,7 @@ const CartScreen = () => {
   const generateOrderId = () => {
     const r = Math.random() * new Date().getMilliseconds();
     setTimeout(() => {
+      
       setOrderId(
         'PARCEL' +
           (1 + Math.floor(r % 2000) + 10000) +
@@ -226,7 +232,7 @@ const CartScreen = () => {
             <View style={{margin: 16}}>
               <View style={styles.buttonStyle}>
                 <Button
-                  title="Start Transaction"
+                  title="Pay Now"
                   onPress={() => startRawTransaction()}
                 />
               </View>
