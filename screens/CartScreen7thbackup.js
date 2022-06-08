@@ -17,7 +17,7 @@ const CartScreen = () => {
   
   const [isOrderIdUpdated, setOrderIdUpdated] = useState(false);
 
-  //bank details trasaction for saving trasaction details //
+ // bank details trasaction for saving trasaction details //
  
   useEffect(() => {
 
@@ -62,9 +62,10 @@ const CartScreen = () => {
 
     generateCheckSumData();
     if(!setOrderIdUpdated){
-      console.log('----------------------------------!setOrderIdUpdated------------------------------');
+      console.log('----------------------------------!setOrderIdUpdated--------------------------');
       generateOrderId__from__backend();
       setOrderIdUpdated(true);
+
     }
    }, 2000);
 
@@ -74,7 +75,7 @@ const CartScreen = () => {
     const [mid, setMid] = useState('GDREdu50085170778323');
 
     //problematic code //
-    const [orderId, setOrderId] = useState('1111111111111111111111111111111123456789');
+    const [orderId, setOrderId] = useState('1111111111111111111111111111111123456');
     console.log('---------------------------------------Order id---'+ orderId +'--------------------------------------');
     //problematic code //
   
@@ -133,7 +134,7 @@ const CartScreen = () => {
   
     };
 
-    const generateOrderId__from__backend=() => {
+    const generateOrderId__from__backend=() =>{
 
       try{
         fetch('http://3.108.170.236/erp/apis/order__id__generation.php',{
@@ -148,7 +149,7 @@ const CartScreen = () => {
             setTimeout(() => {
 
               setOrderId(json[0].order_id);
-              setOrderIdUpdated(true);
+              
               console.log(json[0].order_id);
               console.log(orderId);
             }, 2000);

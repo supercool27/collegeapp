@@ -60,6 +60,17 @@ const FeesScreen = () => {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
+
+        <View style={[styles.card, styles.elevation]}>
+        <View>
+          <Text style={styles.heading}>
+            React Native Box Shadow (Elevation)
+          </Text>
+        </View>
+        <Text>
+          Using the elevation style prop to apply box-shadow for Android devices
+        </Text>
+</View>
       <View style={{flex:1,}}>
       <View style={{padding:10}}>
     <DataTable style={styles.container}>

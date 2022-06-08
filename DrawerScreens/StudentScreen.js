@@ -61,6 +61,51 @@ const StudentScreen = ({navigation}) => {
   return (
     <View style={{padding:20}}>
       <Loader loading={loading} />
+
+      <View style={[styles.card, styles.elevation]}>
+        <View>
+          <Text style={styles.heading}>
+            React Native Box Shadow (Elevation)
+          </Text>
+        </View>
+        <Text>
+          Using the elevation style prop to apply box-shadow for Android devices
+        </Text>
+</View>
+
+<View style={[styles.card, styles.elevation]}>
+        <View>
+          <Text style={styles.heading}>
+            React Native Box Shadow (Elevation)
+          </Text>
+        </View>
+        <Text>
+          Using the elevation style prop to apply box-shadow for Android devices
+        </Text>
+</View>
+<View style={[styles.card, styles.elevation]}>
+        <View>
+          <Text style={styles.heading}>
+            React Native Box Shadow (Elevation)
+          </Text>
+        </View>
+        <Text>
+          Using the elevation style prop to apply box-shadow for Android devices
+        </Text>
+</View>
+<View style={[styles.card, styles.elevation]}>
+        <View>
+          <Text style={styles.heading}>
+            React Native Box Shadow (Elevation)
+          </Text>
+        </View>
+        <Text>
+          Using the elevation style prop to apply box-shadow for Android devices
+        </Text>
+</View>
+
+
+
       {mydata.map((item, key) => (
         <View style={{borderColor:'lightgrey',borderWidth:1}}>
             <Text style={{padding:10}}> Hello, {item.stud_name} </Text>
@@ -96,3 +141,24 @@ const StudentScreen = ({navigation}) => {
 
 
 export default StudentScreen;
+
+
+const styles = StyleSheet.create({
+  heading: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 13,
+  },
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    paddingVertical: 45,
+    paddingHorizontal: 25,
+    width: '100%',
+    marginVertical: 10,
+  },
+  elevation: {
+    elevation: 20,
+    shadowColor: '#52006A',
+  },
+});

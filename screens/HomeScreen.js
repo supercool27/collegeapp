@@ -47,11 +47,19 @@ const sliderData = [
   },
   {
     title: 'Second Game',
-    image: require('../Assets/Images/homescreen/game-2.jpeg'),
+    image: require('../Assets/Images/homescreen/game-3.jpeg'),
   },
   {
     title: 'Second Game',
-    image: require('../Assets/Images/homescreen/game-2.jpeg'),
+    image: require('../Assets/Images/homescreen/game-4.jpeg'),
+  },
+  {
+    title: 'Second Game',
+    image: require('../Assets/Images/homescreen/game-5.jpeg'),
+  },
+  {
+    title: 'Second Game',
+    image: require('../Assets/Images/homescreen/game-6.jpeg'),
   },
   {
     title: 'Second Game',
